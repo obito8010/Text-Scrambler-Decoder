@@ -1,13 +1,8 @@
 import streamlit as st
+import base64
 
 # Title
-st.title("🔐 Text Encryptor & Decryptor")
-
-# Input
-text = st.text_area("Enter your text:")
-
-# Action
-choice = st.radio("Choose an action:", ["Encrypt", "Decrypt"])
+st.title("🔐 Text & File Encryptor / Decryptor")
 
 # Encryption function
 def encrypt(text):
@@ -29,13 +24,50 @@ def decrypt(text):
     decrypted = decrypted.replace("dfg82jr", "a")
     return decrypted
 
-# Perform Action
-if st.button("Submit"):
+# Text section
+st.subheader("📝 Text Input")
+text = st.text_area("Enter your text:")
+choice = st.radio("Choose an action for text:", ["Encrypt", "Decrypt"])
+
+if st.button("Submit Text"):
     if choice == "Encrypt":
         result = encrypt(text)
         st.success("🔐 Encrypted Text:")
-        st.code(result, language='text')
     else:
         result = decrypt(text)
         st.success("🔓 Decrypted Text:")
-        st.code(result, language='text')
+
+    st.code(result, language='text')
+
+    # Download button
+    b64 = base64.b64encode(result.encode()).decode()
+    href = f'<a href="data:file/txt;base64,{b64}" download="result.txt">📥 Download Result</a>'
+    st.markdown(href, unsafe_allow_html=True)
+
+# Divider
+st.markdown("---")
+
+# File section
+st.subheader("📁 File Input")
+uploaded_file = st.file_uploader("Upload a text file (.txt)", type=["txt"])
+file_choice = st.radio("Choose an action for file:", ["Encrypt", "Decrypt"])
+
+if uploaded_file is not None:
+    file_text = uploaded_file.read().decode("utf-8")
+    st.text_area("File Preview", file_text, height=150)
+
+    if st.button("Submit File"):
+        if file_choice == "Encrypt":
+            processed_file = encrypt(file_text)
+            st.success("🔐 File encrypted successfully.")
+        else:
+            processed_file = decrypt(file_text)
+            st.success("🔓 File decrypted successfully.")
+
+        # Download button
+        file_b64 = base64.b64encode(processed_file.encode()).decode()
+        file_href = f'<a href="data:file/txt;base64,{file_b64}" download="processed_file.txt">📥 Download Processed File</a>'
+        st.markdown(file_href, unsafe_allow_html=True)
+
+        # Show content
+        st.code(processed_file, language='text')
