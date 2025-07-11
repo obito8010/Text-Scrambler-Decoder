@@ -38,10 +38,10 @@ This app uses **basic character substitution** to mimic how encryption works. Fo
   <img src="screenshots/ss1.png" width="600"/>
 </p>
 <p align="center">
-  <img src="screenshots/ss2.png" width="600"/>
+  <img src="screenshots/ss3.png" width="600"/>
 </p>
 <p align="center">
-  <img src="screenshots/ss3.png" width="600"/>
+  <img src="screenshots/ss2.png" width="600"/>
 </p>
 
 
