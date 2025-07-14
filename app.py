@@ -39,12 +39,11 @@ if st.button("Submit Text"):
 
     st.code(result, language='text')
 
-    # Download button
     b64 = base64.b64encode(result.encode()).decode()
     href = f'<a href="data:file/txt;base64,{b64}" download="result.txt">📥 Download Result</a>'
     st.markdown(href, unsafe_allow_html=True)
 
-# Divider
+
 st.markdown("---")
 
 # File section
