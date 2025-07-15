@@ -2,7 +2,7 @@ import streamlit as st
 import base64
 
 # Title
-st.title("🔐 Text & File Encryptor / Decryptor")
+st.title("🔐 Text & File Encryptor / Decryptor  ")
 
 # Encryption function
 def encrypt(text):
